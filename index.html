@@ -179,15 +179,59 @@
       transform: translateY(-1.5px);
     }
 
-    /* 5. Centered Hero Section */
+    /* ====================================================
+       5. HERO SECTION (SPLIT: PHOTO LEFT, DETAILS RIGHT)
+       ==================================================== */
     .hero {
-      padding: 8.5rem 9% 6rem;
-      max-width: 900px;
+      padding: 7.5rem 9% 6rem;
+      max-width: 1180px;
       margin: 0 auto;
-      text-align: center;
+    }
+
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem; /* Proper breathing room between photo and text */
+      text-align: left;
+    }
+
+    /* Photo Column */
+    .hero-photo-col {
+      flex-shrink: 0;
+    }
+
+    .profile-photo-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Increased Photo Size */
+    .profile-photo {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(56, 189, 248, 0.3); /* மெல்லிய பார்டர் */
+  box-shadow: none; /* லைட்டிங் முழுமையாக நீக்கப்பட்டது */
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  display: block;
+  background-color: var(--card-bg);
+}
+    
+
+    .profile-photo:hover {
+      transform: scale(1.03);
+      border-color: var(--accent-blue);
+      box-shadow: none;
+    }
+
+    /* Content Column */
+    .hero-content-col {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
+      max-width: 650px;
     }
 
     .status-badge {
@@ -201,7 +245,7 @@
       color: var(--accent-blue);
       font-size: 0.82rem;
       font-weight: 500;
-      margin-bottom: 2rem;
+      margin-bottom: 1.4rem;
     }
 
     .pulse-dot {
@@ -218,10 +262,10 @@
     }
 
     .hero-title {
-      font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+      font-size: clamp(2.6rem, 5vw, 4rem);
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      line-height: 1.18;
+      margin-bottom: 0.8rem;
       color: #ffffff;
     }
 
@@ -234,13 +278,12 @@
     }
 
     .role-title {
-      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
       color: #cbd5e1;
       font-weight: 500;
-      margin-bottom: 2.8rem;
+      margin-bottom: 2.2rem;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
     }
 
@@ -260,9 +303,9 @@
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      gap: 1.1rem;
+      gap: 1rem;
     }
 
     .btn {
@@ -270,7 +313,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 0.75rem 1.6rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 8px;
       font-size: 0.92rem;
       font-weight: 600;
@@ -278,7 +321,7 @@
       transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
-    /* Clean Solid "Hire Me" Button (No Electric Effects) */
+    /* Clean Solid "Hire Me" Button */
     .btn-hire-me {
       background: var(--accent-blue);
       color: #070b14 !important;
@@ -592,7 +635,7 @@
       color: #ffffff;
       font-family: inherit;
       font-size: 0.92rem;
-      transition: border-color 0.25s ease;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
       outline: none;
     }
 
@@ -658,13 +701,34 @@
       font-size: 0.85rem;
     }
 
+    /* Mobile Responsive Split Layout */
     @media (max-width: 900px) {
-      .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .form-row { grid-template-columns: 1fr; }
+      .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.2rem;
+      }
+      .hero-content-col {
+        align-items: center;
+      }
+      .btn-group {
+        justify-content: center;
+      }
+      .profile-photo {
+        width: 180px;
+        height: 180px;
+      }
+      .contact-layout { 
+        grid-template-columns: 1fr; 
+        gap: 2.5rem; 
+      }
+      .form-row { 
+        grid-template-columns: 1fr; 
+      }
     }
 
     @media (max-width: 768px) {
-      .hero { padding: 5.5rem 6% 3.5rem; }
+      .hero { padding: 5rem 6% 3.5rem; }
       section { padding: 4rem 6%; }
       nav { padding: 1rem 6%; }
       .nav-links { display: none; }
@@ -691,42 +755,58 @@
       <li><a href="#experience" class="hover-target">Experience</a></li>
       <li><a href="#projects" class="hover-target">Projects</a></li>
       <li><a href="#education" class="hover-target">Education</a></li>
-      <li><a href="https://drive.google.com/file/d/1ROkA6FqS-RWohMuE1rpMLgFzdv2ivYFM/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Resume 📄</a></li>
+      <li><a href="https://drive.google.com/file/d/1ROkA6FqS-RWohMuE1rpMLgFzdv2ivYFM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="hover-target">Resume 📄</a></li>
       <!-- Top Right: Contact Button -->
       <li><a href="#contact" class="nav-contact-btn hover-target">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ====================================================
+       HERO SECTION: PHOTO (LEFT) & CONTENT (RIGHT)
+       ==================================================== -->
   <header class="hero">
-    <div class="status-badge">
-      <span class="pulse-dot"></span>
-      Available for Embedded Systems Roles
-    </div>
+    <div class="hero-container">
+      
+      <!-- Left Column: Enlarged Profile Photo -->
+      <div class="hero-photo-col">
+        <div class="profile-photo-wrapper">
+          <img src="./profile.jpg" alt="Gopinath D" class="profile-photo hover-target" onerror="this.style.display='none'" />
+        </div>
+      </div>
 
-    <h1 class="hero-title">
-      Hi, I'm <span class="name-blue">Gopinath D</span>
-    </h1>
+      <!-- Right Column: Details & Actions -->
+      <div class="hero-content-col">
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          Available for Embedded Systems Roles
+        </div>
 
-    <div class="role-title">
-      <span>Focus: </span>
-      <span class="role-typing" id="role-text">Embedded Systems</span>
-    </div>
+        <h1 class="hero-title">
+          Hi, I'm <span class="name-blue">Gopinath D</span>
+        </h1>
 
-    <!-- Hero Actions: Clean Solid "Hire Me" (No Electric Effects) -->
-    <div class="btn-group">
-      <a href="#contact" class="btn btn-hire-me hover-target">
-        Hire Me
-      </a>
-      <a href="https://drive.google.com/file/d/1ROkA6FqS-RWohMuE1rpMLgFzdv2ivYFM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-primary hover-target">
-        View Resume 📄
-      </a>
-      <a href="https://drive.google.com/file/d/1ROkA6FqS-RWohMuE1rpMLgFzdv2ivYFM/view?usp=drive_link" download="Gopinath_D_Resume.pdf" class="btn btn-outline hover-target">
-        Download CV 📥
-      </a>
-      <a href="https://www.linkedin.com/in/gopinath-d-777g7" target="_blank" rel="noopener noreferrer" class="btn btn-outline hover-target">
-        LinkedIn Profile ↗
-      </a>
+        <div class="role-title">
+          <span>Focus: </span>
+          <span class="role-typing" id="role-text">Embedded Systems</span>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="btn-group">
+          <a href="#contact" class="btn btn-hire-me hover-target">
+            Hire Me
+          </a>
+          <a href="https://drive.google.com/file/d/1ROkA6FqS-RWohMuE1rpMLgFzdv2ivYFM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-primary hover-target">
+            View Resume 📄
+          </a>
+          <a href="https://drive.google.com/file/d/1ROkA6FqS-RWohMuE1rpMLgFzdv2ivYFM/view?usp=drive_link" download="Gopinath_D_Resume.pdf" class="btn btn-outline hover-target">
+            Download CV 📥
+          </a>
+          <a href="https://www.linkedin.com/in/gopinath-d-777g7" target="_blank" rel="noopener noreferrer" class="btn btn-outline hover-target">
+            LinkedIn Profile ↗
+          </a>
+        </div>
+      </div>
+
     </div>
   </header>
 
@@ -1108,7 +1188,6 @@
     });
 
     function animateCursor() {
-      // Smooth linear interpolation for natural trailing
       curX += (mouseX - curX) * 0.22;
       curY += (mouseY - curY) * 0.22;
       dotCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
